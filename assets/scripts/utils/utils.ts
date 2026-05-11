@@ -31,7 +31,7 @@ export function tweenMoney(label: Label, duration: number, endValue: number, opt
 	const acceptRunDown = options["acceptRunDown"] || false;
 	delete options["acceptRunDown"];
 
-	let currentVal = this.parseValueFromString(label.string);
+	let currentVal = parseValueFromString(label.string);
 
 	if ((!acceptRunDown && endValue < currentVal) || duration === 0) {
 		label.string = formatter(endValue);

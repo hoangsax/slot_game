@@ -23,7 +23,6 @@ export class GameDirector extends Component {
 
     onLoad(): void {
         this.eventManager = this.node.getComponent(GameEventManager);
-
         globalThis.testGame = this;
     }
     
@@ -51,6 +50,10 @@ export class GameDirector extends Component {
             warn("%c resultData ", "color: red", resultData);
             this.eventManager.emit("SPIN_REQUEST", resultData);
         }, 0.3);
+    }
+
+    getDataByBetId(betId: string): JsonAsset {
+        return this.dataByBetId.find(data => data.betId === betId).data;
     }
 }
 

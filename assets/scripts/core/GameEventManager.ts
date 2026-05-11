@@ -3,6 +3,7 @@ const { ccclass, property } = _decorator;
 
 @ccclass("GameEventManager")
 export class GameEventManager extends Component {
+
 	on(event: string, listener: Function, context: any = null): void {
 		this.node.on(event, listener, context);
 	}
