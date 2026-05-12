@@ -1,5 +1,6 @@
 import { _decorator, Component, JsonAsset, warn } from 'cc';
 import { GameEventManager } from './GameEventManager';
+import { EventName } from '../utils/constants';
 const { ccclass, property } = _decorator;
 
 @ccclass('DataByBetId')
@@ -24,16 +25,24 @@ export class GameDirector extends Component {
     onLoad(): void {
         this.eventManager = this.node.getComponent(GameEventManager);
         globalThis.testGame = this;
+
+        this.eventManager.on("SPIN_PRESS", this.onSpinPress, this);
     }
     
     start(): void {
         this.onJoinGameRequest();
     }
 
+    onSpinPress() {
+        this.scheduleOnce(() => {
+            this.eventManager.emit(EventName.RECEIVE_SPIN_RESULT)
+        }, 5)
+    }
+
     onJoinGameRequest(): void {
         this.scheduleOnce(() => {
             this.onJoinGameSuccess();
-        }, 0.2);
+        }, 3);
     }
 
     onJoinGameSuccess(): void {
